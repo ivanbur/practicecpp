@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC0679F521001D36003EABF9 /* background.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC0679F421001D36003EABF9 /* background.bmp */; };
+		BC0679F721001F70003EABF9 /* pixelsonic.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC0679F621001F70003EABF9 /* pixelsonic.bmp */; };
 		BCEC669A20F6E09F00456C01 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCEC669920F6E09F00456C01 /* main.cpp */; };
 		BCEC66A120F6E18E00456C01 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEC66A020F6E18E00456C01 /* SDL2.framework */; };
 		BCEC66A320F6EEF800456C01 /* hello.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCEC66A220F6EEF800456C01 /* hello.bmp */; };
@@ -19,6 +21,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				BC0679F721001F70003EABF9 /* pixelsonic.bmp in CopyFiles */,
+				BC0679F521001D36003EABF9 /* background.bmp in CopyFiles */,
 				BCEC66A320F6EEF800456C01 /* hello.bmp in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -26,6 +30,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BC0679F421001D36003EABF9 /* background.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = background.bmp; path = Resources/background.bmp; sourceTree = "<group>"; };
+		BC0679F621001F70003EABF9 /* pixelsonic.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = pixelsonic.bmp; path = Resources/pixelsonic.bmp; sourceTree = "<group>"; };
 		BCEC669620F6E09F00456C01 /* SDL_Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL_Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCEC669920F6E09F00456C01 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BCEC66A020F6E18E00456C01 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -47,6 +53,8 @@
 		BCEC668D20F6E09F00456C01 = {
 			isa = PBXGroup;
 			children = (
+				BC0679F621001F70003EABF9 /* pixelsonic.bmp */,
+				BC0679F421001D36003EABF9 /* background.bmp */,
 				BCEC66A220F6EEF800456C01 /* hello.bmp */,
 				BCEC66A020F6E18E00456C01 /* SDL2.framework */,
 				BCEC669820F6E09F00456C01 /* SDL_Test */,
@@ -258,6 +266,7 @@
 				BCEC669F20F6E09F00456C01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
