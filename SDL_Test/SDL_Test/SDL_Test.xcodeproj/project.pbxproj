@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		BC0679F521001D36003EABF9 /* background.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC0679F421001D36003EABF9 /* background.bmp */; };
 		BC0679F721001F70003EABF9 /* pixelsonic.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC0679F621001F70003EABF9 /* pixelsonic.bmp */; };
+		BC0B8F74210950C300A6A092 /* testingIMG.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC0B8F73210950C300A6A092 /* testingIMG.png */; };
+		BC0B8F76210953DD00A6A092 /* pngGrassTile.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC0B8F75210953DD00A6A092 /* pngGrassTile.png */; };
+		BC0B8F7821095BAE00A6A092 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC0B8F7721095BAE00A6A092 /* SDL2_image.framework */; };
 		BCEC669A20F6E09F00456C01 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCEC669920F6E09F00456C01 /* main.cpp */; };
 		BCEC66A120F6E18E00456C01 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEC66A020F6E18E00456C01 /* SDL2.framework */; };
 		BCEC66A320F6EEF800456C01 /* hello.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCEC66A220F6EEF800456C01 /* hello.bmp */; };
@@ -21,6 +24,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				BC0B8F76210953DD00A6A092 /* pngGrassTile.png in CopyFiles */,
+				BC0B8F74210950C300A6A092 /* testingIMG.png in CopyFiles */,
 				BC0679F721001F70003EABF9 /* pixelsonic.bmp in CopyFiles */,
 				BC0679F521001D36003EABF9 /* background.bmp in CopyFiles */,
 				BCEC66A320F6EEF800456C01 /* hello.bmp in CopyFiles */,
@@ -32,6 +37,9 @@
 /* Begin PBXFileReference section */
 		BC0679F421001D36003EABF9 /* background.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = background.bmp; path = Resources/background.bmp; sourceTree = "<group>"; };
 		BC0679F621001F70003EABF9 /* pixelsonic.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = pixelsonic.bmp; path = Resources/pixelsonic.bmp; sourceTree = "<group>"; };
+		BC0B8F73210950C300A6A092 /* testingIMG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = testingIMG.png; path = Resources/testingIMG.png; sourceTree = "<group>"; };
+		BC0B8F75210953DD00A6A092 /* pngGrassTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pngGrassTile.png; path = Resources/pngGrassTile.png; sourceTree = "<group>"; };
+		BC0B8F7721095BAE00A6A092 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		BCEC669620F6E09F00456C01 /* SDL_Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL_Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCEC669920F6E09F00456C01 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BCEC66A020F6E18E00456C01 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -43,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC0B8F7821095BAE00A6A092 /* SDL2_image.framework in Frameworks */,
 				BCEC66A120F6E18E00456C01 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -53,6 +62,9 @@
 		BCEC668D20F6E09F00456C01 = {
 			isa = PBXGroup;
 			children = (
+				BC0B8F7721095BAE00A6A092 /* SDL2_image.framework */,
+				BC0B8F75210953DD00A6A092 /* pngGrassTile.png */,
+				BC0B8F73210950C300A6A092 /* testingIMG.png */,
 				BC0679F621001F70003EABF9 /* pixelsonic.bmp */,
 				BC0679F421001D36003EABF9 /* background.bmp */,
 				BCEC66A220F6EEF800456C01 /* hello.bmp */,
