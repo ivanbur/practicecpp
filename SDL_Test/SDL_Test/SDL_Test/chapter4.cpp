@@ -14,6 +14,12 @@ const int SCREEN_HEIGHT = 720;
 const int TILE_SIZE = 80;
 const int CHARACTER_W = 91;
 const int CHARACTER_H = 100;
+const int FPS = 60;
+
+bool pressedLeft = false;
+bool pressedRight = false;
+bool pressedUp = false;
+bool pressedDown = false;
 
 int main() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) { // should return 0 if all goes well
@@ -51,15 +57,18 @@ int main() {
     SDL_Texture *texture = loadIMGTexture("image.png", renderer);
     SDL_Texture *character = loadIMGTexture("testingIMG.png", renderer);
     SDL_Texture *backgroundIMG = loadIMGTexture("pngGrassTile.png", renderer);
+    SDL_Texture *slime = loadIMGTexture("slime_sheet.png", renderer);
     
-    int clipWidth = 100;
-    int clipHeight = 100;
-    int startXPos = SCREEN_WIDTH / 2 - CHARACTER_W / 2;
-    int startYPos = SCREEN_HEIGHT / 2 - CHARACTER_H / 2;
-    int amountOfClips = 4;
+    int clipWidth = 48;
+    int clipHeight = 40;
+    int XPos = SCREEN_WIDTH / 2 - CHARACTER_W / 2;
+    int YPos = SCREEN_HEIGHT / 2 - CHARACTER_H / 2;
+    int amountOfClips = 10;
     int currentClip = 0;
+    int animateSlimeEveryXFrames = 8;
+    int currentFrame = 0;
     
-    SDL_Rect allClips[amountOfClips]; // 4 is how many clips there are
+    SDL_Rect allClips[amountOfClips];
     
     for (int i = 0; i < amountOfClips; i++) {
         allClips[i].x = 0;
@@ -70,26 +79,23 @@ int main() {
     
     while(!pressedQuit) {
         while (SDL_PollEvent(&e)) {
+            
             if (e.type == SDL_QUIT) { // Closed window manually
                 pressedQuit = true;
             }
             if (e.type == SDL_KEYDOWN) { // Pressed key
                 switch(e.key.keysym.sym) {
                     case SDLK_UP:
-                        currentClip = 0;
-                        startYPos -= 10;
+                        pressedUp = true;
                         break;
                     case SDLK_DOWN:
-                        currentClip = 1;
-                        startYPos += 10;
+                        pressedDown = true;
                         break;
                     case SDLK_LEFT:
-                        currentClip = 2;
-                        startXPos -= 10;
+                        pressedLeft = true;
                         break;
                     case SDLK_RIGHT:
-                        currentClip = 3;
-                        startXPos += 10;
+                        pressedRight = true;
                         break;
                     case SDLK_ESCAPE:
                         pressedQuit = true;
@@ -98,14 +104,50 @@ int main() {
                         break;
                 }
             }
+            if (e.type == SDL_KEYUP) {
+                switch(e.key.keysym.sym) {
+                    case SDLK_UP:
+                        pressedUp = false;
+                        break;
+                    case SDLK_DOWN:
+                        pressedDown = false;
+                        break;
+                    case SDLK_LEFT:
+                        pressedLeft = false;
+                        break;
+                    case SDLK_RIGHT:
+                        pressedRight = false;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (pressedUp) {
+                YPos -= 10;
+            }
+            if (pressedDown) {
+                YPos += 10;
+            }
+            if (pressedLeft) {
+                XPos -= 10;
+            }
+            if (pressedRight) {
+                XPos += 10;
+            }
         }
         
         // Render
         SDL_RenderClear(renderer);
         drawBackground(backgroundIMG, renderer, SCREEN_WIDTH, SCREEN_HEIGHT, TILE_SIZE);
-        renderIMGTexture(character, renderer, startXPos, startYPos, CHARACTER_W, CHARACTER_H);
-//        renderClipTexture(texture, renderer, startXPos, startYPos, &allClips[currentClip]);
+//        renderIMGTexture(character, renderer, XPos, YPos, CHARACTER_W, CHARACTER_H);
+        renderClipTexture(slime, renderer, XPos, YPos, &allClips[currentClip]);
+        if (currentFrame % animateSlimeEveryXFrames == 0) {
+            currentClip++;
+        }
+        currentClip %= amountOfClips;
         SDL_RenderPresent(renderer);
+        SDL_Delay(1000*1/FPS);
+        currentFrame++;
     }
     
     // Clean up properly
@@ -117,64 +159,3 @@ int main() {
     
     return 0;
 }
-
-//void logSDLError(std::ostream &os, const std::string &msg) {
-//    os << msg << " error: " << SDL_GetError() << std::endl;
-//}
-//
-//SDL_Texture* loadTexture(const std::string &file, SDL_Renderer *renderer) {
-//    SDL_Surface *surface = SDL_LoadBMP(file.c_str());
-//    
-//    SDL_Texture *texture = nullptr; // start as nullpointer to avoid pointer errors
-//    
-//    if (surface != nullptr) { // if it loaded ok
-//        texture = SDL_CreateTextureFromSurface(renderer, surface);
-//        SDL_FreeSurface(surface);
-//        
-//        if (texture == nullptr) { // if didn't load ok
-//            logSDLError(std::cout, "SDL_CreateTextureFromSurface");
-//        }
-//    } else {
-//        logSDLError(std::cout, "SDL_LoadBMP");
-//    }
-//    
-//    return texture;
-//}
-//
-//// SDL_Image loadtexture
-//
-//SDL_Texture* loadIMGTexture(const std::string &file, SDL_Renderer *renderer) {
-//    SDL_Texture *texture = IMG_LoadTexture(renderer, file.c_str());
-//    if (texture == nullptr) {
-//        logSDLError(std::cout, "IMG_LoadTexture");
-//    }
-//    
-//    return texture;
-//}
-//
-//void renderTexture(SDL_Texture *texture, SDL_Renderer *renderer, int x, int y) {
-//    // Set up destination rectangle
-//    SDL_Rect dst;
-//    dst.x = x;
-//    dst.y = y;
-//    
-//    // Query texture to get width & height to use
-//    SDL_QueryTexture(texture, NULL, NULL, &dst.w, &dst.h);
-//    SDL_RenderCopy(renderer, texture, NULL, &dst);
-//}
-//
-//void renderIMGTexture(SDL_Texture *texture, SDL_Renderer *renderer, int x, int y, int w, int h) {
-//    SDL_Rect dst; // destination rectangle
-//    dst.x = x;
-//    dst.y = y;
-//    dst.w = w;
-//    dst.h = h;
-//    
-//    SDL_RenderCopy(renderer, texture, NULL, &dst);
-//}
-//
-//void renderIMGTexture(SDL_Texture *texture, SDL_Renderer *renderer, int x, int y) {
-//    int w, h;
-//    SDL_QueryTexture(texture, NULL, NULL, &w, &h);
-//    renderIMGTexture(texture, renderer, x, y, w, h);
-//}
