@@ -122,19 +122,21 @@ int main() {
                         break;
                 }
             }
-            if (pressedUp) {
-                YPos -= 10;
-            }
-            if (pressedDown) {
-                YPos += 10;
-            }
-            if (pressedLeft) {
-                XPos -= 10;
-            }
-            if (pressedRight) {
-                XPos += 10;
-            }
         }
+        
+        if (pressedUp) {
+            YPos -= 10;
+        }
+        if (pressedDown) {
+            YPos += 10;
+        }
+        if (pressedLeft) {
+            XPos -= 10;
+        }
+        if (pressedRight) {
+            XPos += 10;
+        }
+
         
         // Render
         SDL_RenderClear(renderer);
