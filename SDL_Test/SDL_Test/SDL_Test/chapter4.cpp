@@ -15,6 +15,7 @@ const int TILE_SIZE = 80;
 const int CHARACTER_W = 91;
 const int CHARACTER_H = 100;
 const int FPS = 60;
+const int MOVEMENT_SPEED = 5;
 
 bool pressedLeft = false;
 bool pressedRight = false;
@@ -54,8 +55,8 @@ int main() {
     SDL_Event e;
     bool pressedQuit = false;
     
-    SDL_Texture *texture = loadIMGTexture("image.png", renderer);
-    SDL_Texture *character = loadIMGTexture("testingIMG.png", renderer);
+//    SDL_Texture *texture = loadIMGTexture("image.png", renderer);
+//    SDL_Texture *character = loadIMGTexture("testingIMG.png", renderer);
     SDL_Texture *backgroundIMG = loadIMGTexture("pngGrassTile.png", renderer);
     SDL_Texture *slime = loadIMGTexture("slime_sheet.png", renderer);
     
@@ -63,18 +64,25 @@ int main() {
     int clipHeight = 40;
     int XPos = SCREEN_WIDTH / 2 - CHARACTER_W / 2;
     int YPos = SCREEN_HEIGHT / 2 - CHARACTER_H / 2;
-    int amountOfClips = 10;
+    int amountOfClipsSlime = 20;
     int currentClip = 0;
     int animateSlimeEveryXFrames = 8;
     int currentFrame = 0;
+    bool facingRight = true;
     
-    SDL_Rect allClips[amountOfClips];
+    SDL_Rect allClips[amountOfClipsSlime];
     
-    for (int i = 0; i < amountOfClips; i++) {
+    for (int i = 0; i < amountOfClipsSlime/2; i++) {
         allClips[i].x = 0;
         allClips[i].y = i*clipHeight;
         allClips[i].w = clipWidth;
         allClips[i].h = clipHeight;
+        
+        int nextColumn = i + amountOfClipsSlime/2; // 2 is how many columns there are
+        allClips[nextColumn].x = 48;
+        allClips[nextColumn].y = allClips[i].y;
+        allClips[nextColumn].w = clipWidth;
+        allClips[nextColumn].h = clipHeight;
     }
     
     while(!pressedQuit) {
@@ -125,16 +133,18 @@ int main() {
         }
         
         if (pressedUp) {
-            YPos -= 10;
+            YPos -= MOVEMENT_SPEED;
         }
-        if (pressedDown) {
-            YPos += 10;
-        }
+//        if (pressedDown) {
+//            YPos += MOVEMENT_SPEED;
+//        }
         if (pressedLeft) {
-            XPos -= 10;
+            facingRight = false;
+            XPos -= MOVEMENT_SPEED;
         }
         if (pressedRight) {
-            XPos += 10;
+            facingRight = true;
+            XPos += MOVEMENT_SPEED;
         }
 
         
@@ -146,7 +156,11 @@ int main() {
         if (currentFrame % animateSlimeEveryXFrames == 0) {
             currentClip++;
         }
-        currentClip %= amountOfClips;
+        currentClip %= amountOfClipsSlime/2;
+        if (facingRight) {
+            currentClip += amountOfClipsSlime/2;
+        }
+        
         SDL_RenderPresent(renderer);
         SDL_Delay(1000*1/FPS);
         currentFrame++;

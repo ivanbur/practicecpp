@@ -15,6 +15,7 @@
 		BC0EC6CD212E518E001CEAAF /* slime_sheet.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC0EC6CC212E518E001CEAAF /* slime_sheet.png */; };
 		BC3A63E0211BD8B1007FAB4B /* image.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC3A63DF211BD8B1007FAB4B /* image.png */; };
 		BCDC099A21129D64000AA2A4 /* chapter4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDC099921129D64000AA2A4 /* chapter4.cpp */; };
+		BCEB9EC921378961000A9CAB /* VectorClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCEB9EC821378961000A9CAB /* VectorClass.cpp */; };
 		BCEC669A20F6E09F00456C01 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCEC669920F6E09F00456C01 /* main.cpp */; };
 		BCEC66A120F6E18E00456C01 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEC66A020F6E18E00456C01 /* SDL2.framework */; };
 		BCEC66A320F6EEF800456C01 /* hello.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCEC66A220F6EEF800456C01 /* hello.bmp */; };
@@ -48,6 +49,7 @@
 		BC0EC6CC212E518E001CEAAF /* slime_sheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slime_sheet.png; path = Resources/slime_sheet.png; sourceTree = "<group>"; };
 		BC3A63DF211BD8B1007FAB4B /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image.png; path = Resources/image.png; sourceTree = "<group>"; };
 		BCDC099921129D64000AA2A4 /* chapter4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chapter4.cpp; path = SDL_Test/chapter4.cpp; sourceTree = "<group>"; };
+		BCEB9EC821378961000A9CAB /* VectorClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VectorClass.cpp; sourceTree = "<group>"; };
 		BCEC669620F6E09F00456C01 /* SDL_Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL_Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCEC669920F6E09F00456C01 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BCEC66A020F6E18E00456C01 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		BCEC669820F6E09F00456C01 /* SDL_Test */ = {
 			isa = PBXGroup;
 			children = (
+				BCEB9EC821378961000A9CAB /* VectorClass.cpp */,
 				BCEC669920F6E09F00456C01 /* main.cpp */,
 			);
 			path = SDL_Test;
@@ -172,6 +175,7 @@
 			files = (
 				BCDC099A21129D64000AA2A4 /* chapter4.cpp in Sources */,
 				BCEC669A20F6E09F00456C01 /* main.cpp in Sources */,
+				BCEB9EC921378961000A9CAB /* VectorClass.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
