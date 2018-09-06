@@ -7,6 +7,7 @@
 //
 
 #include "Header.h"
+#include "VectorClass.cpp"
 
 
 const int SCREEN_WIDTH = 960;
@@ -21,6 +22,11 @@ bool pressedLeft = false;
 bool pressedRight = false;
 bool pressedUp = false;
 bool pressedDown = false;
+
+void movePlayer(int &xPos, int &yPos, Vector &playerVector) {
+    xPos += playerVector.getX();
+    yPos += playerVector.getY();
+}
 
 int main() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) { // should return 0 if all goes well
@@ -45,7 +51,7 @@ int main() {
         return 1;
     }
     
-    if (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG != IMG_INIT_PNG) { // Only initialize PNG cause that's all we're gonna use
+    if (IMG_Init(IMG_INIT_PNG) & (IMG_INIT_PNG != IMG_INIT_PNG)) { // Only initialize PNG cause that's all we're gonna use
         logSDLError(std::cout, "IMG_INIT_PNG");
         SDL_DestroyWindow(window);
         SDL_Quit();
@@ -69,6 +75,11 @@ int main() {
     int animateSlimeEveryXFrames = 8;
     int currentFrame = 0;
     bool facingRight = true;
+    Vector playerVector = *new Vector(0, 0);
+    Vector jumpVector = *new Vector(0, 5);
+    Vector rightVector = *new Vector(5, 0);
+    Vector leftVector = *new Vector(-5, 0);
+    Vector gravityVector = *new Vector(0, -1);
     
     SDL_Rect allClips[amountOfClipsSlime];
     
@@ -133,20 +144,29 @@ int main() {
         }
         
         if (pressedUp) {
-            YPos -= MOVEMENT_SPEED;
+            playerVector = playerVector.subtractVector(jumpVector);
         }
 //        if (pressedDown) {
 //            YPos += MOVEMENT_SPEED;
 //        }
         if (pressedLeft) {
             facingRight = false;
-            XPos -= MOVEMENT_SPEED;
+            playerVector = playerVector.addVector(leftVector);
         }
         if (pressedRight) {
             facingRight = true;
-            XPos += MOVEMENT_SPEED;
+            playerVector = playerVector.addVector(rightVector);
+        }
+        if (YPos < 10) {
+            std::cout << gravityVector.getY() << std::endl;
+            playerVector = playerVector.subtractVector(gravityVector);
+            gravityVector.setY(gravityVector.getY() - 1);
+        } else {
+            gravityVector.setY(0);
+            std::cout << gravityVector.getY() << std::endl;
         }
 
+        movePlayer(XPos, YPos, playerVector);
         
         // Render
         SDL_RenderClear(renderer);
