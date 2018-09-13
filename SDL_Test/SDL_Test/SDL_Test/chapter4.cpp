@@ -16,7 +16,7 @@ const int TILE_SIZE = 80;
 const int CHARACTER_W = 91;
 const int CHARACTER_H = 100;
 const int FPS = 60;
-const int MOVEMENT_SPEED = 5;
+const int MOVEMENT_SPEED = 3;
 
 bool pressedLeft = false;
 bool pressedRight = false;
@@ -24,7 +24,20 @@ bool pressedUp = false;
 bool pressedDown = false;
 
 void movePlayer(int &xPos, int &yPos, Vector &playerVector) {
-    xPos += playerVector.getX();
+    if (xPos + playerVector.getX() <= SCREEN_WIDTH - CHARACTER_W || xPos + playerVector.getX() >= 0) {
+        std::cout << xPos + playerVector.getX() << std::endl;
+        std::cout << SCREEN_WIDTH - CHARACTER_W << std::endl;
+        std::cout << playerVector.getX() << std::endl;
+        xPos += playerVector.getX();
+    } else {
+        std::cout << "testing" << std::endl;
+        if (xPos + playerVector.getX() > SCREEN_WIDTH) {
+            xPos = SCREEN_WIDTH;
+        } else {
+            xPos = 0;
+        }
+    }
+    
     yPos += playerVector.getY();
 }
 
@@ -77,8 +90,8 @@ int main() {
     bool facingRight = true;
     Vector playerVector = *new Vector(0, 0);
     Vector jumpVector = *new Vector(0, 5);
-    Vector rightVector = *new Vector(5, 0);
-    Vector leftVector = *new Vector(-5, 0);
+    Vector rightVector = *new Vector(MOVEMENT_SPEED, 0);
+    Vector leftVector = *new Vector(-MOVEMENT_SPEED, 0);
     Vector gravityVector = *new Vector(0, -1);
     
     SDL_Rect allClips[amountOfClipsSlime];
@@ -143,10 +156,7 @@ int main() {
             }
         }
         
-        if (pressedUp) {
-            playerVector = playerVector.subtractVector(jumpVector);
-        }
-//        if (pressedDown) {
+        //        if (pressedDown) {
 //            YPos += MOVEMENT_SPEED;
 //        }
         if (pressedLeft) {
@@ -157,15 +167,34 @@ int main() {
             facingRight = true;
             playerVector = playerVector.addVector(rightVector);
         }
-        if (YPos < 10) {
-            std::cout << gravityVector.getY() << std::endl;
-            playerVector = playerVector.subtractVector(gravityVector);
-            gravityVector.setY(gravityVector.getY() - 1);
+        
+        if (YPos <= 400) {
+//            std::cout << currentFrame << std::endl;
+            if (YPos + playerVector.subtractVector(gravityVector).getY() >= 400) {
+                YPos = 400;
+                gravityVector.setY(0);
+                playerVector.setY(0);
+            } else {
+                playerVector = playerVector.subtractVector(gravityVector);
+                gravityVector.setY(gravityVector.getY() - 1);
+            }
         } else {
             gravityVector.setY(0);
-            std::cout << gravityVector.getY() << std::endl;
+            playerVector.setY(0);
+        }
+        if (pressedUp) {
+            playerVector = playerVector.subtractVector(jumpVector);
         }
 
+
+        if (playerVector.getX() > 0) {
+            playerVector.setX(playerVector.getX() - 1);
+        }
+        
+        if (playerVector.getX() < 0) {
+            playerVector.setX(playerVector.getX() + 1);
+        }
+        
         movePlayer(XPos, YPos, playerVector);
         
         // Render
