@@ -18,6 +18,7 @@
 		BCE1F46C21532EC600074548 /* stone_tiles.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCE1F46B21532EC600074548 /* stone_tiles.png */; };
 		BCE1F46E21532F6B00074548 /* stone_tile_big.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCE1F46D21532F6B00074548 /* stone_tile_big.png */; };
 		BCE1F470215338CB00074548 /* backgroundSky.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCE1F46F215338CB00074548 /* backgroundSky.png */; };
+		BCE1F47221533CEB00074548 /* pixel_trap.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCE1F47121533CEB00074548 /* pixel_trap.png */; };
 		BCEB9EC921378961000A9CAB /* VectorClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCEB9EC821378961000A9CAB /* VectorClass.cpp */; };
 		BCEC669A20F6E09F00456C01 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCEC669920F6E09F00456C01 /* main.cpp */; };
 		BCEC66A120F6E18E00456C01 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEC66A020F6E18E00456C01 /* SDL2.framework */; };
@@ -31,6 +32,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				BCE1F47221533CEB00074548 /* pixel_trap.png in CopyFiles */,
 				BCE1F470215338CB00074548 /* backgroundSky.png in CopyFiles */,
 				BCE1F46E21532F6B00074548 /* stone_tile_big.png in CopyFiles */,
 				BCE1F46C21532EC600074548 /* stone_tiles.png in CopyFiles */,
@@ -58,6 +60,7 @@
 		BCE1F46B21532EC600074548 /* stone_tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stone_tiles.png; path = Resources/stone_tiles.png; sourceTree = "<group>"; };
 		BCE1F46D21532F6B00074548 /* stone_tile_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stone_tile_big.png; path = Resources/stone_tile_big.png; sourceTree = "<group>"; };
 		BCE1F46F215338CB00074548 /* backgroundSky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backgroundSky.png; path = Resources/backgroundSky.png; sourceTree = "<group>"; };
+		BCE1F47121533CEB00074548 /* pixel_trap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pixel_trap.png; path = Resources/pixel_trap.png; sourceTree = "<group>"; };
 		BCEB9EC821378961000A9CAB /* VectorClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VectorClass.cpp; sourceTree = "<group>"; };
 		BCEC669620F6E09F00456C01 /* SDL_Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL_Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCEC669920F6E09F00456C01 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -82,6 +85,7 @@
 		BCEC668D20F6E09F00456C01 = {
 			isa = PBXGroup;
 			children = (
+				BCE1F47121533CEB00074548 /* pixel_trap.png */,
 				BCE1F46F215338CB00074548 /* backgroundSky.png */,
 				BCE1F46D21532F6B00074548 /* stone_tile_big.png */,
 				BCE1F46B21532EC600074548 /* stone_tiles.png */,

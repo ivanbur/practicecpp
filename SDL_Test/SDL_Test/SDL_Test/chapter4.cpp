@@ -98,6 +98,7 @@ int main() {
     SDL_Texture *backgroundStone = loadIMGTexture("stone_tile_big.png", renderer);
     SDL_Texture *backgroundSky = loadIMGTexture("backgroundSky.png", renderer);
     SDL_Texture *slime = loadIMGTexture("slime_sheet.png", renderer);
+    SDL_Texture *trap = loadIMGTexture("pixel_trap.png", renderer);
     
     int XPos = SCREEN_WIDTH / 2 - CHARACTER_W / 2;
     int YPos = SCREEN_HEIGHT / 2 - CHARACTER_H / 2;
@@ -174,9 +175,6 @@ int main() {
             }
         }
         
-        //        if (pressedDown) {
-//            YPos += MOVEMENT_SPEED;
-//        }
         if (pressedLeft) {
             facingRight = false;
             playerVector = playerVector.addVector(leftVector);
