@@ -34,5 +34,6 @@ SDL_Texture* loadIMGTexture(const std::string &file, SDL_Renderer *renderer);
 void renderClipTexture(SDL_Texture *texture, SDL_Renderer *renderer, SDL_Rect dst, SDL_Rect *clip = nullptr);
 void renderClipTexture(SDL_Texture *texture, SDL_Renderer *renderer, int x, int y, SDL_Rect *clip = nullptr);
 void drawBackground(SDL_Texture *backgroundIMG, SDL_Renderer *renderer, int screenWidth, int screenHeight, int tileSize);
+void drawBackgroundFromBottom(SDL_Texture *backgroundIMG, SDL_Renderer *renderer, int screenWidth, int screenHeight, int heightOfTilesWantToDraw, int tileSize);
 
 #endif /* Header_h */

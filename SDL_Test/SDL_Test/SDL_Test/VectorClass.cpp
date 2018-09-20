@@ -10,11 +10,17 @@
 #include <math.h>
 
 class Vector {
-    private: int x;
-    private: int y;
+    private: double x;
+    private: double y;
     private: double velocity;
     
     public: Vector(int startX, int startY) {
+        this->x = startX;
+        this->y = startY;
+        updateVelocity();
+    }
+    
+    public: Vector(double startX, double startY) {
         this->x = startX;
         this->y = startY;
         updateVelocity();
@@ -25,22 +31,29 @@ class Vector {
     }
     
     public: Vector addVector(Vector vector) {
-        int newX = this->x + vector.x;
-        int newY = this->y + vector.y;
+        double newX = this->x + vector.x;
+        double newY = this->y + vector.y;
         
         return Vector(newX, newY);
     }
     
     public: Vector addVector(int x, int y) {
-        int newX = this->x + x;
-        int newY = this->y + y;
+        double newX = this->x + x;
+        double newY = this->y + y;
         
         return Vector(newX, newY);
     }
     
+    public: Vector addVector(double x, double y) {
+        double newX = this->x + x;
+        double newY = this->y + y;
+    
+        return Vector(newX, newY);
+    }
+    
     public: Vector subtractVector(Vector vector) {
-        int newX = this->x - vector.x;
-        int newY = this->y - vector.y;
+        double newX = this->x - vector.x;
+        double newY = this->y - vector.y;
         
         return Vector(newX, newY);
     }
@@ -50,16 +63,26 @@ class Vector {
         updateVelocity();
     }
     
+    public: void setX(double x) {
+        this->x = x;
+        updateVelocity();
+    }
+    
     public: void setY(int y) {
         this->y = y;
         updateVelocity();
     }
     
-    public: int getX() {
+    public: void setY(double y) {
+        this->y = y;
+        updateVelocity();
+    }
+    
+    public: double getX() {
         return this->x;
     }
     
-    public: int getY() {
+    public: double getY() {
         return this->y;
     }
 };

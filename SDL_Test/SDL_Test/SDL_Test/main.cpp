@@ -235,3 +235,27 @@ void drawBackground(SDL_Texture *backgroundIMG, SDL_Renderer *renderer, int scre
     }
 
 }
+
+void drawBackgroundFromBottom(SDL_Texture *backgroundIMG, SDL_Renderer *renderer, int screenWidth, int screenHeight, int heightOfTilesWantToDraw, int tileSize) {
+    // Draw tiles
+    
+    int xTiles = screenWidth / tileSize;
+    int yTiles = heightOfTilesWantToDraw / tileSize;
+    
+    int tileX = 0;
+    int tileY = (screenHeight - tileSize) / tileSize;
+    
+    for (int i = 0; i < xTiles * yTiles; i++) {
+        renderIMGTexture(backgroundIMG, renderer, tileX * tileSize, tileY * tileSize, tileSize, tileSize);
+        
+        if (tileX < xTiles - 1) {
+            tileX++;
+        } else {
+            tileX = 0;
+            tileY--;
+        }
+        
+    }
+    
+}
+

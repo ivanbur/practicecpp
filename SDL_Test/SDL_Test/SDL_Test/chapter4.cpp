@@ -13,10 +13,16 @@
 const int SCREEN_WIDTH = 960;
 const int SCREEN_HEIGHT = 720;
 const int TILE_SIZE = 80;
+const int TILE_SIZE_STONE = 48;
+const int HEIGHT_STONE = TILE_SIZE_STONE*5;
 const int CHARACTER_W = 91;
 const int CHARACTER_H = 100;
+const int CLIP_W = 48;
+const int CLIP_H = 40;
 const int FPS = 60;
-const int MOVEMENT_SPEED = 3;
+const int MOVEMENT_SPEED = 2;
+
+const int PLATFORM_LINE = SCREEN_HEIGHT - HEIGHT_STONE - CLIP_H;
 
 bool pressedLeft = false;
 bool pressedRight = false;
@@ -24,18 +30,30 @@ bool pressedUp = false;
 bool pressedDown = false;
 
 void movePlayer(int &xPos, int &yPos, Vector &playerVector) {
-    if (xPos + playerVector.getX() <= SCREEN_WIDTH - CHARACTER_W || xPos + playerVector.getX() >= 0) {
-        std::cout << xPos + playerVector.getX() << std::endl;
-        std::cout << SCREEN_WIDTH - CHARACTER_W << std::endl;
-        std::cout << playerVector.getX() << std::endl;
-        xPos += playerVector.getX();
+//    if (xPos + playerVector.getX() <= SCREEN_WIDTH - CHARACTER_W || xPos + playerVector.getX() >= 0) {
+//        std::cout << xPos + playerVector.getX() << std::endl;
+//        std::cout << SCREEN_WIDTH - CHARACTER_W << std::endl;
+//        std::cout << playerVector.getX() << std::endl;
+//        xPos += playerVector.getX();
+//    } else {
+//        std::cout << "testing" << std::endl;
+//        if (xPos + playerVector.getX() > SCREEN_WIDTH) {
+//            xPos = SCREEN_WIDTH;
+//        } else {
+//            xPos = 0;
+//        }
+//    }
+
+    if (xPos < 0) {
+        std::cout << "other stuff" << std::endl;
+        playerVector.setX(10);
+        xPos = 10;
+    } else if(xPos > SCREEN_WIDTH - CLIP_W) {
+        std::cout << "stuff" << std::endl;
+        playerVector.setX(-10);
+        xPos = SCREEN_WIDTH - CLIP_W - 10;
     } else {
-        std::cout << "testing" << std::endl;
-        if (xPos + playerVector.getX() > SCREEN_WIDTH) {
-            xPos = SCREEN_WIDTH;
-        } else {
-            xPos = 0;
-        }
+        xPos += playerVector.getX();
     }
     
     yPos += playerVector.getY();
@@ -77,10 +95,10 @@ int main() {
 //    SDL_Texture *texture = loadIMGTexture("image.png", renderer);
 //    SDL_Texture *character = loadIMGTexture("testingIMG.png", renderer);
     SDL_Texture *backgroundIMG = loadIMGTexture("pngGrassTile.png", renderer);
+    SDL_Texture *backgroundStone = loadIMGTexture("stone_tile_big.png", renderer);
+    SDL_Texture *backgroundSky = loadIMGTexture("backgroundSky.png", renderer);
     SDL_Texture *slime = loadIMGTexture("slime_sheet.png", renderer);
     
-    int clipWidth = 48;
-    int clipHeight = 40;
     int XPos = SCREEN_WIDTH / 2 - CHARACTER_W / 2;
     int YPos = SCREEN_HEIGHT / 2 - CHARACTER_H / 2;
     int amountOfClipsSlime = 20;
@@ -92,21 +110,21 @@ int main() {
     Vector jumpVector = *new Vector(0, 5);
     Vector rightVector = *new Vector(MOVEMENT_SPEED, 0);
     Vector leftVector = *new Vector(-MOVEMENT_SPEED, 0);
-    Vector gravityVector = *new Vector(0, -1);
+    Vector gravityVector = *new Vector(0.0, -0.0);
     
     SDL_Rect allClips[amountOfClipsSlime];
     
     for (int i = 0; i < amountOfClipsSlime/2; i++) {
         allClips[i].x = 0;
-        allClips[i].y = i*clipHeight;
-        allClips[i].w = clipWidth;
-        allClips[i].h = clipHeight;
+        allClips[i].y = i*CLIP_H;
+        allClips[i].w = CLIP_W;
+        allClips[i].h = CLIP_H;
         
         int nextColumn = i + amountOfClipsSlime/2; // 2 is how many columns there are
-        allClips[nextColumn].x = 48;
+        allClips[nextColumn].x = CLIP_W;
         allClips[nextColumn].y = allClips[i].y;
-        allClips[nextColumn].w = clipWidth;
-        allClips[nextColumn].h = clipHeight;
+        allClips[nextColumn].w = CLIP_W;
+        allClips[nextColumn].h = CLIP_H;
     }
     
     while(!pressedQuit) {
@@ -168,15 +186,15 @@ int main() {
             playerVector = playerVector.addVector(rightVector);
         }
         
-        if (YPos <= 400) {
+        if (YPos <= PLATFORM_LINE) {
 //            std::cout << currentFrame << std::endl;
-            if (YPos + playerVector.subtractVector(gravityVector).getY() >= 400) {
-                YPos = 400;
+            if (YPos + playerVector.subtractVector(gravityVector).getY() >= PLATFORM_LINE) {
+                YPos = PLATFORM_LINE;
                 gravityVector.setY(0);
                 playerVector.setY(0);
             } else {
                 playerVector = playerVector.subtractVector(gravityVector);
-                gravityVector.setY(gravityVector.getY() - 1);
+                gravityVector.setY(gravityVector.getY() - 0.85);
             }
         } else {
             gravityVector.setY(0);
@@ -199,7 +217,9 @@ int main() {
         
         // Render
         SDL_RenderClear(renderer);
-        drawBackground(backgroundIMG, renderer, SCREEN_WIDTH, SCREEN_HEIGHT, TILE_SIZE);
+//        drawBackground(backgroundIMG, renderer, SCREEN_WIDTH, SCREEN_HEIGHT, TILE_SIZE);
+        renderIMGTexture(backgroundSky, renderer, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 94);
+        drawBackgroundFromBottom(backgroundStone, renderer, SCREEN_WIDTH, SCREEN_HEIGHT, HEIGHT_STONE, TILE_SIZE_STONE);
 //        renderIMGTexture(character, renderer, XPos, YPos, CHARACTER_W, CHARACTER_H);
         renderClipTexture(slime, renderer, XPos, YPos, &allClips[currentClip]);
         if (currentFrame % animateSlimeEveryXFrames == 0) {
